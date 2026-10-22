@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChopChop CI - Livraison de Repas à Abidjan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="test1.css">
+</head>
+<body>
+    <header>
+        <h1>🍗 ChopChop CI</h1>
+        <p>Livraison de repas à domicile à Abidjan</p>
+    </header>
+
+    <main>
+        <h2>Notre Menu</h2>
+        <div class="plats">
+            <div class="plat">
+                <h3>Poulet Braisé</h3>
+                <p>Avec Alloco + Salade</p>
+                <p class="prix">3500 FCFA</p>
+                <button onclick="ajouterPanier('Poulet Braisé', 3500)">Ajouter</button>
+            </div>
+
+            <div class="plat">
+                <h3>Garba Spécial</h3>
+                <p>Thon + Poivron + Piment</p>
+                <p class="prix">2000 FCFA</p>
+                <button onclick="ajouterPanier('Garba Spécial', 2000)">Ajouter</button>
+            </div>
+
+            <div class="plat">
+                <h3>Attiéké Poisson</h3>
+                <p>Poisson Braisé + Sauce</p>
+                <p class="prix">3000 FCFA</p>
+                <button onclick="ajouterPanier('Attiéké Poisson', 3000)">Ajouter</button>
+            </div>
+        </div>
+
+        <h2>Votre Panier</h2>
+        <div id="resumeCommande" style="min-height: 50px;">Aucun plat sélectionné</div>
+        <p id="totalAPayer"><b>Total : 0 FCFA</b></p>
+
+        <h2>Informations de Livraison</h2>
+        <form onsubmit="envoyerCommande(); return false;">
+            <input type="text" id="nom" placeholder="Votre Nom" required>
+            <input type="tel" id="telephone" placeholder="Votre Téléphone" required>
+            <input type="text" id="quartier" placeholder="Votre Quartier ex: Yopougon" required>
+            
+            <label>Frais de Livraison :</label>
+            <select id="livraison" onchange="calculerTotal()">
+                <option value="1000">1000 FCFA - Centre</option>
+                <option value="1500">1500 FCFA - Périphérie</option>
+            </select>
+
+            <label>Mode de Paiement :</label>
+            <select id="paiement">
+                <option value="Mobile Money">Mobile Money</option>
+                <option value="Espèces">Payer à la livraison</option>
+            </select>
+
+            <button type="submit" class="btn-commander">Envoyer la commande</button>
+        </form>
+    </main>
+
+    <!-- POP-UP CONFIRMATION -->
+    <div id="popupConfirm" class="popup-overlay">
+      <div class="popup-box">
+        <h3>Confirmation</h3>
+        <div id="recapPopup"></div>
+        <div class="popup-actions">
+          <button class="btn-annuler" onclick="fermerPopup()">Annuler</button>
+          <button class="btn-confirmer" onclick="confirmerAjout()">Confirmer</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="test1.js"></script>
+</body>
+</html>
