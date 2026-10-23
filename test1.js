@@ -131,9 +131,9 @@ function envoyerCommande() {
         afficherPanier();
         
         // Actualiser la page
-        window.location.reload(); 
-        
-    }, 2000); // 2000ms = 2 secondes
+        setTimeout(() => {
+    window.location.reload(); // Actualise seulement le site
+}, 2000);
 }
 // 1. Quand on change le mode de paiement
 function afficherOperateur() {
