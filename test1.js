@@ -132,8 +132,23 @@ function envoyerCommande() {
         
         // Actualiser la page
         setTimeout(() => {
-    window.location.reload(); // Actualise seulement le site
-}, 2000);
+    // 1. On vide tout manuellement
+    commande = [];
+    total = 0;
+    document.getElementById("nom").value = "";
+    document.getElementById("telephone").value = "";
+    document.getElementById("quartier").value = "";
+    document.getElementById("paiement").value = "";
+    document.getElementById("operateur-box").style.display = "none";
+    document.getElementById("payer-maintenant").style.display = "none";
+    
+    // 2. On réaffiche le panier vide
+    afficherPanier();
+    
+    // 3. On scroll en haut
+    window.scrollTo(0, 0);
+    
+}, 3000);
 }
 // 1. Quand on change le mode de paiement
 function afficherOperateur() {
