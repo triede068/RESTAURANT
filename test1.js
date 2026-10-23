@@ -103,3 +103,35 @@ function afficherOperateur() {
         document.getElementById("operateur").value = ""; // on reset
     }
 }
+let lienPaiement = {
+    "Wave": "https://pay.wave.com/m/M_votre_lien_wave", // Mets ton lien Wave Business
+    "Orange Money": "https://om.ci/payer/votre_lien_om", // Mets ton lien OM
+    "MTN Mobile Money": "https://mtn.ci/payer/votre_lien_mtn",
+    "Moov Money": "https://moovmoney.ci/payer/votre_lien_moov"
+};
+
+function afficherBoutonPaiement() {
+    let operateur = document.getElementById("operateur").value;
+    let box = document.getElementById("payer-maintenant");
+    let nomOp = document.getElementById("nom-operateur");
+    
+    if(operateur !== "" && total > 0) {
+        box.style.display = "block";
+        nomOp.innerText = operateur;
+    } else {
+        box.style.display = "none";
+    }
+}
+
+function payerDirect() {
+    let operateur = document.getElementById("operateur").value;
+    let totalFinal = total + parseInt(document.getElementById("livraison").value);
+    
+    if(lienPaiement[operateur]) {
+        // On ajoute le montant dans le lien. Exemple pour Wave: ?amount=5000
+        let urlPaiement = lienPaiement[operateur] + "?amount=" + totalFinal;
+        window.open(urlPaiement, '_blank'); // Ouvre la page de paiement
+    } else {
+        alert("Lien de paiement non configuré pour " + operateur);
+    }
+}
