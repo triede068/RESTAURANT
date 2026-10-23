@@ -68,28 +68,56 @@ function envoyerCommande() {
     let nom = document.getElementById("nom").value;
     let tel = document.getElementById("telephone").value;
     let quartier = document.getElementById("quartier").value;
-    let lieu = document.getElementById("lieu").value;
+    let paiement = document.getElementById("paiement").value;
+    let operateur = document.getElementById("operateur").value;
 
-    if(commande.length === 0 || nom === "" || tel === "" || quartier === "" || lieu === "") {
+    if(commande.length === 0 || nom === "" || tel === "" || quartier === "" || paiement === "") {
         alert("Merci de remplir tous les champs et de choisir un plat");
+        return;
+    }
+    
+    if(paiement === "Mobile Money" && operateur === "") {
+        alert("Merci de choisir un opérateur Mobile Money");
         return;
     }
 
     let message = `*NOUVELLE COMMANDE CHOPCHOP CI*\n\n`;
-    message += `*Nom:* ${nom}\n*Tel:* ${tel}\n*Quartier:* ${quartier}\n*Lieu Publique:* ${lieu}\n\n`;
-    message += `Ta commande :\n`;
+    message += `*Nom:* ${nom}\n`;
+    message += `*Tel:* ${tel}\n`;
+    message += `*Quartier:* ${quartier}\n`;
+    message += `*Paiement:* ${paiement}`;
+    
+    if(paiement === "Mobile Money") {
+        message += ` - ${operateur}\n\n`;
+    } else {
+        message += `\n\n`;
+    }
+    
+    message += `*COMMANDES:*\n`;
     commande.forEach(item => {
         message += `- ${item.nom} : ${item.prix} FCFA\n`;
     });
-    message += `\n*TOTAL : ${total + parseInt(document.getElementById("livraison").value)} FCFA*`;
+    
+    let fraisLivraison = parseInt(document.getElementById("livraison").value) || 0;
+    let totalFinal = total + fraisLivraison;
+    message += `\n*Frais de livraison:* ${fraisLivraison} FCFA`;
+    message += `\n*TOTAL : ${totalFinal} FCFA*`;
     
     let numeroWhatsApp = "2250757560417"; 
     let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
     
-    commande = [];
-    total = 0;
-    afficherResume();
+    window.open(url, '_blank'); // Ouvre WhatsApp
+
+    // AFFICHE LE MESSAGE DE CONFIRMATION
+    document.getElementById("confirmation").style.display = "block";
+
+    // Optionnel : Vider le panier après 3 secondes
+    setTimeout(() => {
+        commande = [];
+        total = 0;
+        afficherPanier();
+        document.getElementById("confirmation").style.display = "none"; // cache le message
+    }, 3000);
 }
 // 1. Quand on change le mode de paiement
 function afficherOperateur() {
