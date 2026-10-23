@@ -10,7 +10,7 @@
 <body>
     <header>
         <h1>🍗 ChopChop CI</h1>
-        <p>Livraison de repas à domicile à Abidjan</p>
+        <p>Livraison de repas à domicile à Bouna</p>
     </header>
 
     <main>
@@ -44,9 +44,10 @@
 
         <h2>Informations de Livraison</h2>
         <form onsubmit="envoyerCommande(); return false;">
-            <input type="text" id="nom" placeholder="Votre Nom" required>
+            <input type="text" id="nom" placeholder="Votre Nom et Prénom" required>
             <input type="tel" id="telephone" placeholder="Votre Téléphone" required>
-            <input type="text" id="quartier" placeholder="Votre Quartier ex: Yopougon" required>
+            <input type="text" id="quartier" placeholder="Votre Quartier" required>
+            <input type="text" id="lieu" placeholder="Le lieu publique le plus proche" required>
             
             <label>Frais de Livraison :</label>
             <select id="livraison" onchange="calculerTotal()">
@@ -54,11 +55,25 @@
                 <option value="1500">1500 FCFA - Périphérie</option>
             </select>
 
-            <label>Mode de Paiement :</label>
-            <select id="paiement">
-                <option value="Mobile Money">Mobile Money</option>
-                <option value="Espèces">Payer à la livraison</option>
-            </select>
+            <label>Mode de paiement</label>
+<select id="paiement" onchange="afficherOperateur()">
+    <option value="">-- Choisir --</option>
+    <option value="Mobile Money">Mobile Money</option>
+    <option value="Espèces à la livraison">Espèces à la livraison</option>
+    <option value="Carte">Carte</option>
+</select>
+
+<!-- Ce bloc apparaît seulement si Mobile Money est choisi -->
+<div id="operateur-box" style="display:none; margin-top:10px;">
+    <label>Choisir l'opérateur</label>
+    <select id="operateur">
+        <option value="">-- Choisir opérateur --</option>
+        <option value="Orange Money">Orange Money</option>
+        <option value="MTN Mobile Money">MTN Mobile Money</option>
+        <option value="Wave">Wave</option>
+        <option value="Moov Money">Moov Money</option>
+    </select>
+</div>
 
             <button type="submit" class="btn-commander">Envoyer la commande</button>
         </form>
