@@ -103,7 +103,7 @@ function envoyerCommande() {
     message += `\n*Frais de livraison:* ${fraisLivraison} FCFA`;
     message += `\n*TOTAL : ${totalFinal} FCFA*`;
     
- let numeroWhatsApp = "2250757560417"; 
+let numeroWhatsApp = "22507XXXXXXXX"; 
     let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
     
     // 1. Ouvre WhatsApp dans un nouvel onglet
@@ -121,29 +121,19 @@ function envoyerCommande() {
 
     // 3. APRES 2 SECONDES : Fermer WhatsApp + Actualiser le site
     setTimeout(() => {
-    // 1. Vider le panier
-    commande = [];
-    total = 0;
-    
-    // 2. Vider le formulaire
-    document.getElementById("nom").value = "";
-    document.getElementById("telephone").value = "";
-    document.getElementById("quartier").value = "";
-    document.getElementById("paiement").value = "";
-    document.getElementById("operateur").value = "";
-    
-    // 3. Cacher les blocs
-    document.getElementById("operateur-box").style.display = "none";
-    document.getElementById("payer-maintenant").style.display = "none";
-    document.getElementById("confirmation").style.display = "none";
-    
-    // 4. Réafficher le panier vide
-    afficherPanier();
-    
-    // 5. Remonter en haut de la page
-    window.scrollTo({top: 0, behavior: 'smooth'});
-    
-}, 3000);
+        if(whatsappWindow) {
+            whatsappWindow.close(); // Ferme l'onglet WhatsApp
+        }
+        
+        // Vider le panier
+        commande = [];
+        total = 0;
+        afficherPanier();
+        
+        // Actualiser la page
+        window.location.reload(); 
+        
+    }, 2000); // 2000ms = 2 secondes
 }
 // 1. Quand on change le mode de paiement
 function afficherOperateur() {
