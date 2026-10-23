@@ -5,7 +5,7 @@ let platEnAttente = null;
 function ajouterPanier(nomPlat, prix) {
     platEnAttente = {nom: nomPlat, prix: prix};
     
-    document.getElementById("recapPopup").innerHTML = `
+    document.getElementById("recapPopup").innerHTML = ` 
         <p>Ajouter ce plat à votre panier ?</p>
         <h4 style="color:#FF6B00;">${nomPlat}</h4>
         <p><b>${prix} FCFA</b></p> 
@@ -103,21 +103,37 @@ function envoyerCommande() {
     message += `\n*Frais de livraison:* ${fraisLivraison} FCFA`;
     message += `\n*TOTAL : ${totalFinal} FCFA*`;
     
-    let numeroWhatsApp = "2250757560417"; 
+    let numeroWhatsApp = "22507XXXXXXXX"; 
     let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
     
-    window.open(url, '_blank'); // Ouvre WhatsApp
+    // 1. Ouvre WhatsApp dans un nouvel onglet
+    let whatsappWindow = window.open(url, '_blank');
 
-    // AFFICHE LE MESSAGE DE CONFIRMATION
-    document.getElementById("confirmation").style.display = "block";
+    // 2. AFFICHE LE MESSAGE DE CONFIRMATION
+    let conf = document.getElementById("confirmation");
+    conf.style.display = "block";
+    
+    if(paiement === "Espèces à la livraison") {
+        conf.innerHTML = `✅ Merci pour votre commande !<br>Paiement en espèces à la livraison. Nous vous appelons bientôt.`;
+    } else if(paiement === "Mobile Money") {
+        conf.innerHTML = `✅ Merci pour votre commande !<br>Paiement ${operateur} effectué. Nous préparons votre commande.`;
+    }
 
-    // Optionnel : Vider le panier après 3 secondes
+    // 3. APRES 2 SECONDES : Fermer WhatsApp + Actualiser le site
     setTimeout(() => {
+        if(whatsappWindow) {
+            whatsappWindow.close(); // Ferme l'onglet WhatsApp
+        }
+        
+        // Vider le panier
         commande = [];
         total = 0;
         afficherPanier();
-        document.getElementById("confirmation").style.display = "none"; // cache le message
-    }, 3000);
+        
+        // Actualiser la page
+        window.location.reload(); 
+        
+    }, 2000); // 2000ms = 2 secondes
 }
 // 1. Quand on change le mode de paiement
 function afficherOperateur() {
