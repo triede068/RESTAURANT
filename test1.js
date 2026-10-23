@@ -8,7 +8,7 @@ function ajouterPanier(nomPlat, prix) {
     document.getElementById("recapPopup").innerHTML = `
         <p>Ajouter ce plat à votre panier ?</p>
         <h4 style="color:#FF6B00;">${nomPlat}</h4>
-        <p><b>${prix} FCFA</b></p>
+        <p><b>${prix} FCFA</b></p> 
     `;
     
     document.getElementById("popupConfirm").style.display = "flex";
