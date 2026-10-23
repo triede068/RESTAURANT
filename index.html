@@ -66,7 +66,7 @@
 <!-- Ce bloc apparaît seulement si Mobile Money est choisi -->
 <div id="operateur-box" style="display:none; margin-top:10px;">
     <label>Choisir l'opérateur</label>
-    <select id="operateur">
+    <select id="operateur" onchange="afficherBoutonPaiement()">
         <option value="">-- Choisir opérateur --</option>
         <option value="Orange Money">Orange Money</option>
         <option value="MTN Mobile Money">MTN Mobile Money</option>
@@ -75,6 +75,12 @@
     </select>
 </div>
 
+<!-- Bouton qui apparaît quand total > 0 -->
+<div id="payer-maintenant" style="display:none; margin-top:15px;">
+    <button onclick="payerDirect()" style="background:#00D1FF; color:white; width:100%; padding:12px; border:none; border-radius:8px;">
+        Payer maintenant avec <span id="nom-operateur"></span>
+    </button>
+</div>
             <button type="submit" class="btn-commander">Envoyer la commande</button>
         </form>
     </main>
