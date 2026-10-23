@@ -91,47 +91,52 @@ function envoyerCommande() {
     total = 0;
     afficherResume();
 }
-// Fonction pour afficher le choix d'opérateur
+// 1. Quand on change le mode de paiement
 function afficherOperateur() {
     let paiement = document.getElementById("paiement").value;
     let box = document.getElementById("operateur-box");
+    let btnPayer = document.getElementById("payer-maintenant");
     
     if(paiement === "Mobile Money") {
-        box.style.display = "block"; // on montre
+        box.style.display = "block"; // montre les opérateurs
     } else {
-        box.style.display = "none"; // on cache
-        document.getElementById("operateur").value = ""; // on reset
+        box.style.display = "none"; // cache
+        btnPayer.style.display = "none"; // cache aussi le bouton
+        document.getElementById("operateur").value = "";
     }
 }
-let lienPaiement = {
-    "Wave": "https://pay.wave.com/m/M_votre_lien_wave", // Mets ton lien Wave Business
-    "Orange Money": "https://om.ci/payer/votre_lien_om", // Mets ton lien OM
-    "MTN Mobile Money": "https://mtn.ci/payer/votre_lien_mtn",
-    "Moov Money": "https://moovmoney.ci/payer/votre_lien_moov"
-};
 
+// 2. Quand on choisit l'opérateur
 function afficherBoutonPaiement() {
     let operateur = document.getElementById("operateur").value;
     let box = document.getElementById("payer-maintenant");
     let nomOp = document.getElementById("nom-operateur");
     
     if(operateur !== "" && total > 0) {
-        box.style.display = "block";
+        box.style.display = "block"; // AFFICHE LE BOUTON
         nomOp.innerText = operateur;
     } else {
         box.style.display = "none";
     }
 }
 
+// 3. Quand on clique pour payer
 function payerDirect() {
     let operateur = document.getElementById("operateur").value;
-    let totalFinal = total + parseInt(document.getElementById("livraison").value);
+    let fraisLivraison = parseInt(document.getElementById("livraison").value) || 0;
+    let totalFinal = total + fraisLivraison;
+    
+    let lienPaiement = {
+        "Wave": "https://pay.wave.com/m/M_TON_LIEN_WAVE", 
+        "Orange Money": "https://om.ci/payer/TON_LIEN_OM",
+        "MTN Mobile Money": "https://mtn.ci/payer/TON_LIEN_MTN",
+        "Moov Money": "https://moovmoney.ci/payer/TON_LIEN_MOOV"
+    };
     
     if(lienPaiement[operateur]) {
-        // On ajoute le montant dans le lien. Exemple pour Wave: ?amount=5000
         let urlPaiement = lienPaiement[operateur] + "?amount=" + totalFinal;
-        window.open(urlPaiement, '_blank'); // Ouvre la page de paiement
+        window.open(urlPaiement, '_blank'); 
     } else {
-        alert("Lien de paiement non configuré pour " + operateur);
+        alert("Ajoute ton lien de paiement pour " + operateur);
     }
 }
