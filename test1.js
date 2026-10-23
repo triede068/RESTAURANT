@@ -103,7 +103,7 @@ function envoyerCommande() {
     message += `\n*Frais de livraison:* ${fraisLivraison} FCFA`;
     message += `\n*TOTAL : ${totalFinal} FCFA*`;
     
-let numeroWhatsApp = "2250757560417"; 
+let numeroWhatsApp = "22507XXXXXXXX"; 
     let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
     
     // 1. Ouvre WhatsApp dans un nouvel onglet
@@ -134,6 +134,7 @@ let numeroWhatsApp = "2250757560417";
         window.location.reload(); 
         
     }, 2000); // 2000ms = 2 secondes
+}
 }
 // 1. Quand on change le mode de paiement
 function afficherOperateur() {
