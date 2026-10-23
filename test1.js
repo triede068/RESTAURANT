@@ -68,14 +68,15 @@ function envoyerCommande() {
     let nom = document.getElementById("nom").value;
     let tel = document.getElementById("telephone").value;
     let quartier = document.getElementById("quartier").value;
+    let lieu = document.getElementById("lieu").value;
 
-    if(commande.length === 0 || nom === "" || tel === "" || quartier === "") {
+    if(commande.length === 0 || nom === "" || tel === "" || quartier === "" || lieu === "") {
         alert("Merci de remplir tous les champs et de choisir un plat");
         return;
     }
 
     let message = `*NOUVELLE COMMANDE CHOPCHOP CI*\n\n`;
-    message += `*Nom:* ${nom}\n*Tel:* ${tel}\n*Quartier:* ${quartier}\n\n`;
+    message += `*Nom:* ${nom}\n*Tel:* ${tel}\n*Quartier:* ${quartier}\n*Lieu Publique:* ${lieu}\n\n`;
     message += `Ta commande :\n`;
     commande.forEach(item => {
         message += `- ${item.nom} : ${item.prix} FCFA\n`;
@@ -89,4 +90,16 @@ function envoyerCommande() {
     commande = [];
     total = 0;
     afficherResume();
+}
+// Fonction pour afficher le choix d'opérateur
+function afficherOperateur() {
+    let paiement = document.getElementById("paiement").value;
+    let box = document.getElementById("operateur-box");
+    
+    if(paiement === "Mobile Money") {
+        box.style.display = "block"; // on montre
+    } else {
+        box.style.display = "none"; // on cache
+        document.getElementById("operateur").value = ""; // on reset
+    }
 }
