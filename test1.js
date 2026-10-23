@@ -121,32 +121,27 @@ function envoyerCommande() {
 
     // 3. APRES 2 SECONDES : Fermer WhatsApp + Actualiser le site
     setTimeout(() => {
-        if(whatsappWindow) {
-            whatsappWindow.close(); // Ferme l'onglet WhatsApp
-        }
-        
-        // Vider le panier
-        commande = [];
-        total = 0;
-        afficherPanier();
-        
-        // Actualiser la page
-        setTimeout(() => {
-    // 1. On vide tout manuellement
+    // 1. Vider le panier
     commande = [];
     total = 0;
+    
+    // 2. Vider le formulaire
     document.getElementById("nom").value = "";
     document.getElementById("telephone").value = "";
     document.getElementById("quartier").value = "";
     document.getElementById("paiement").value = "";
+    document.getElementById("operateur").value = "";
+    
+    // 3. Cacher les blocs
     document.getElementById("operateur-box").style.display = "none";
     document.getElementById("payer-maintenant").style.display = "none";
+    document.getElementById("confirmation").style.display = "none";
     
-    // 2. On réaffiche le panier vide
+    // 4. Réafficher le panier vide
     afficherPanier();
     
-    // 3. On scroll en haut
-    window.scrollTo(0, 0);
+    // 5. Remonter en haut de la page
+    window.scrollTo({top: 0, behavior: 'smooth'});
     
 }, 3000);
 }
