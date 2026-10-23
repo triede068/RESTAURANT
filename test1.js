@@ -103,30 +103,20 @@ function envoyerCommande() {
     message += `\n*Frais de livraison:* ${fraisLivraison} FCFA`;
     message += `\n*TOTAL : ${totalFinal} FCFA*`;
     
-let numeroWhatsApp = "22507XXXXXXXX"; 
+    let numeroWhatsApp = "2250757560417"; 
     let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
     
-    window.open(url, '_blank'); // Ouvre WhatsApp pour TOUS
+    window.open(url, '_blank'); // Ouvre WhatsApp
 
-    // 1. AFFICHER LE MESSAGE DE CONFIRMATION POUR TOUS
-    let conf = document.getElementById("confirmation");
-    conf.style.display = "block";
+    // AFFICHE LE MESSAGE DE CONFIRMATION
+    document.getElementById("confirmation").style.display = "block";
 
-    // 2. CHANGER LE TEXTE SELON LE PAIEMENT
-    if(paiement === "Espèces à la livraison") {
-        conf.innerHTML = `✅ Merci pour votre commande !<br>Paiement en espèces à la livraison. Nous vous appelons bientôt.`;
-    } else if(paiement === "Mobile Money") {
-        conf.innerHTML = `✅ Merci pour votre commande !<br>Paiement ${operateur} effectué. Nous préparons votre commande.`;
-    } else {
-        conf.innerHTML = `✅ Merci pour votre commande !<br>Nous vous contactons sur WhatsApp dans quelques minutes.`;
-    }
-
-    // 3. VIDER LE PANIER APRES 3 SECONDES
+    // Optionnel : Vider le panier après 3 secondes
     setTimeout(() => {
         commande = [];
         total = 0;
         afficherPanier();
-        conf.style.display = "none"; 
+        document.getElementById("confirmation").style.display = "none"; // cache le message
     }, 3000);
 }
 // 1. Quand on change le mode de paiement
