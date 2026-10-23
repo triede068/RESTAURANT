@@ -103,7 +103,7 @@ function envoyerCommande() {
     message += `\n*Frais de livraison:* ${fraisLivraison} FCFA`;
     message += `\n*TOTAL : ${totalFinal} FCFA*`;
     
-let numeroWhatsApp = "22507XXXXXXXX"; 
+let numeroWhatsApp = "2250757560417"; 
     let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
     
     // 1. Ouvre WhatsApp dans un nouvel onglet
