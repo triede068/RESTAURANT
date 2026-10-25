@@ -15,28 +15,40 @@
 
     <main>
         <h2>Notre Menu</h2>
-        <div class="plats">
-            <div class="plat">
-                <h3>Poulet Braisé</h3>
-                <p>Avec Alloco + Salade</p>
-                <p class="prix">3500 FCFA</p>
-                <button onclick="ajouterPanier('Poulet Braisé', 3500)">Ajouter</button>
-            </div>
-
-            <div class="plat">
-                <h3>Garba Spécial</h3>
-                <p>Thon + Poivron + Piment</p>
-                <p class="prix">2000 FCFA</p>
-                <button onclick="ajouterPanier('Garba Spécial', 2000)">Ajouter</button>
-            </div>
-
-            <div class="plat">
-                <h3>Attiéké Poisson</h3>
-                <p>Poisson Braisé + Sauce</p>
-                <p class="prix">3000 FCFA</p>
-                <button onclick="ajouterPanier('Attiéké Poisson', 3000)">Ajouter</button>
+        <div class="menu-grid">
+        <!-- PLAT 1 -->
+        <div class="plat">
+            <img src="img/alloco_poisson.jpeg" alt="Poulet Braisé">
+            <div class="plat-info">
+                <h3>poisson Braisé + Alloco</h3>
+                <p>Poisson braisé au charbon avec alloco et crudités</p>
+                <span class="prix">4000 FCFA</span>
+                <button class="btn" onclick="ajouterPanier('Poulet Braisé + Alloco', 4000)">Commander</button>
             </div>
         </div>
+
+        <!-- PLAT 2 -->
+        <div class="plat">
+            <img src="img/garba.jpg" alt="Garba">
+            <div class="plat-info">
+                <h3>Garba Spécial</h3>
+                <p>Garba avec poisson thon, piment et légumes</p>
+                <span class="prix">1500 FCFA</span>
+                <button class="btn" onclick="ajouterPanier('Garba Spécial', 1500)">Commander</button>
+            </div>
+        </div>
+
+        <!-- PLAT 3 -->
+        <div class="plat">
+            <img src="img/Domoda.jpg" alt="Kedjenou">
+            <div class="plat-info">
+                <h3>Domoda </h3>
+                <p>Viande de boeuf + Riz blanc</p>
+                <span class="prix">3500 FCFA</span>
+                <button class="btn" onclick="ajouterPanier('Kedjenou de Poulet', 3500)">Commander</button>
+            </div>
+        </div>
+    </div>
 
         <h2>Votre Panier</h2>
         <div id="resumeCommande" style="min-height: 50px;">Aucun plat sélectionné</div>
@@ -51,8 +63,7 @@
             
             <label>Frais de Livraison :</label>
             <select id="livraison" onchange="calculerTotal()">
-                <option value="1000">1000 FCFA - Centre</option>
-                <option value="1500">1500 FCFA - Périphérie</option>
+                <option value="500">500 FCFA </option>
             </select>
 
             <label>Mode de paiement</label>
